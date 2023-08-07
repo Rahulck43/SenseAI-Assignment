@@ -5,6 +5,7 @@ import morgan from "morgan";
 import 'dotenv/config'
 import dbConnection from "./utils/dbConnection";
 import adminRouter from "./routes/adminRouter";
+import userRouter from "./routes/userRouter";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 app.use('/admin', adminRouter);
+app.use('/', userRouter);
 
 dbConnection();
 app.listen(5000, () => {
