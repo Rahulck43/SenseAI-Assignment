@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../utils/adminSlice'
 import apiInstance from '../../utils/APIinstance'
@@ -26,9 +28,27 @@ const DashBoard = () => {
     }
 
     const handleDelete = async (userId) => {
-        await apiInstance.delete(`/admin/users/${userId}`)
-        fetchUsersList()
-    }
+        confirmAlert({
+            title: 'Confirm Delete',
+            message: 'Are you sure you want to delete this user?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        try {
+                            await apiInstance.delete(`/admin/users/${userId}`);
+                            fetchUsersList()
+                        } catch (error) {
+                            console.error('Error deleting user:', error);
+                        }
+                    }
+                },
+                {
+                    label: 'No'
+                }
+            ]
+        });
+    };
 
     useEffect(() => {
         if (!isLoggedIn) {
