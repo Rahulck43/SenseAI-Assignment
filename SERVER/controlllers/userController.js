@@ -75,34 +75,36 @@ const postLogin = async (req, res) => {
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });
         if (!user) {
-            return res.status(404).json({
+            res.status(404).json({
                 success: false,
                 message: 'email not found'
             });
-        }
-        const isPassValid = await bcrypt.compare(password, user.password);
-        if (!isPassValid) {
-            return res.status(401).json({
-                success: false,
-                message: 'invalid password'
-            });
-        }
-        const token = jwt.sign(
-            { user_id: user._id, email },
-            jwtKey,
-            {
-                expiresIn: "2h",
+        } else {
+            const isPassValid = await bcrypt.compare(password, user.password);
+            if (!isPassValid) {
+                res.status(401).json({
+                    success: false,
+                    message: 'incorrect password'
+                });
+            } else {
+                const token = jwt.sign(
+                    { user_id: user._id, email },
+                    jwtKey,
+                    {
+                        expiresIn: "2h",
+                    }
+                );
+                res.cookie('token', token, { httpOnly: true });
+                res.status(200).json({
+                    success: true,
+                    message: 'login successful',
+                    user: user
+                })
             }
-        );
-        res.cookie('token', token, { httpOnly: true });
-        return res.status(200).json({
-            success: true,
-            message: 'login successful',
-            user: user
-        });
+        }
     } catch (error) {
         console.error(error);
-        return res.status(500).json({
+        res.status(500).json({
             success: false,
             message: 'Internal server error'
         });

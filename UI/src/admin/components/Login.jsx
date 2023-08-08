@@ -20,7 +20,6 @@ const Login = () => {
 
 
     const onSubmit = async (values) => {
-        console.log('at onsubmit')
         try {
             const response = await apiInstance.post('/admin/login', values)
             const { success, message } = response.data;
