@@ -4,7 +4,7 @@ import signupValidation from '../utils/signupValidationSchema'
 import apiInstance from '../../utils/APIinstance'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../utils/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const Register = () => {
@@ -12,7 +12,7 @@ const Register = () => {
   const [loginError, setLoginError] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const isLoggedIn=useSelector((store)=>store.user.success)
+  const isLoggedIn = useSelector((store) => store.user.success)
 
   const onSubmit = async (values) => {
     try {
@@ -43,17 +43,17 @@ const Register = () => {
       name: '',
       email: '',
       password: '',
-      confirmPassword:''
+      confirmPassword: ''
     },
     validationSchema: signupValidation,
     onSubmit
   })
 
-useEffect(()=>{
-  if(isLoggedIn){
-    navigate('/profile')
-  }
-},[isLoggedIn])
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/profile')
+    }
+  }, [isLoggedIn])
 
   return (
     <body className="antialiased bg-gradient-to-br from-green-100 to-white">
@@ -152,10 +152,12 @@ useEffect(()=>{
                     </div>
                   </button>
                   <div className="flex justify-evenly mt-5">
-                    <a
-                      href="#"
-                      className="w-full text-center font-medium text-gray-500"
-                    >Singin!</a>
+                    <Link
+                      to="/"
+                      className="text-black-500 font-bold hover:text-red-700"
+                    >
+                      Login
+                    </Link>
                   </div>
                 </div>
                 <p className="text-red-500">{loginError}</p>

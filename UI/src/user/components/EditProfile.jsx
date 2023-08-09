@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import profileValidation from '../utils/profileValidationSchema'
 import { useNavigate } from 'react-router-dom'
 
+
 const EditProfile = () => {
     const navigate = useNavigate()
     const [userData, setUserData] = useState({})
@@ -105,7 +106,7 @@ const EditProfile = () => {
                             value={values.mobileNo}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className="bg-gray-200  border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="mobNo" name='mobNo' type="text" />
+                            className="bg-gray-200  border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="mobileNo" name='mobileNo' type="text" />
                         {errors.mobileNo && touched.mobileNo && <p className="text-red-500">{errors.mobileNo}</p>}
                     </div>
                 </div>
@@ -131,8 +132,7 @@ const EditProfile = () => {
 
                 <div className="md:w-2/3">
                     <div className="mb-3">
-                        <input
-                            className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
+                        <input className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
                             type="file"
                             name="file"
                             id="file"
@@ -157,7 +157,7 @@ const EditProfile = () => {
                             Updating...
                         </button>
                     ) : (
-                        <div className="md:w-2/3">
+                        <div className="md:w-2/3 py-4">
                             <button type="submit" className="shadow bg-blue-600 hover:bg-blue-800 focus:shadow-outline focus:outline-none text-white font-semibold py-2 px-4 rounded" >
                                 Save
                             </button>

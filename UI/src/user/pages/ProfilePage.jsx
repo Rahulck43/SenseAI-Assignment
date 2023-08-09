@@ -19,7 +19,7 @@ const ProfilePage = () => {
         <div className='bg-gray-100 min-h-screen' >
             <div>
                 <NavBar />
-                <div className='flex  justify-center h-full mt-20'>
+                <div className='flex  justify-center mt-20'>
                     <Profile  />
                 </div>
             </div>

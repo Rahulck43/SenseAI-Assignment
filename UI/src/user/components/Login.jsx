@@ -4,7 +4,7 @@ import loginValidation from '../utils/loginValidationSchema'
 import apiInstance from '../../utils/APIinstance'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../utils/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
@@ -47,11 +47,11 @@ const Login = () => {
         onSubmit
     })
 
-    useEffect(()=>{
-        if(isLoggedIn){
+    useEffect(() => {
+        if (isLoggedIn) {
             navigate('/profile')
         }
-    },[isLoggedIn])
+    }, [isLoggedIn])
 
     return (
         <body className="antialiased bg-gradient-to-br from-green-100 to-white">
@@ -122,10 +122,12 @@ const Login = () => {
                                         </div>
                                     </button>
                                     <div className="flex justify-evenly mt-5">
-                                        <a
-                                            href="#"
-                                            className="w-full text-center font-medium text-gray-500"
-                                        >Signup!</a>
+                                        <Link
+                                            to="/signup"
+                                            className="text-black-500 font-bold hover:text-red-700"
+                                        >
+                                            Signup
+                                        </Link>
                                     </div>
                                 </div>
                                 <p className="text-red-500">{loginError}</p>

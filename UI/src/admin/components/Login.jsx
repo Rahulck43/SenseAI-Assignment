@@ -9,15 +9,11 @@ import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
-
     const dispatch = useDispatch()
     const navigate=useNavigate()
     const [loginError, setLoginError] = useState('')
     const admin = useSelector((store) => store.admin)
     const isLoggedIn = admin.success;
-
-
-
 
     const onSubmit = async (values) => {
         try {
