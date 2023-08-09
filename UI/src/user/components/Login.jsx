@@ -125,7 +125,7 @@ const Login = () => {
                                         <a
                                             href="#"
                                             className="w-full text-center font-medium text-gray-500"
-                                        >Singup!</a>
+                                        >Signup!</a>
                                     </div>
                                 </div>
                                 <p className="text-red-500">{loginError}</p>

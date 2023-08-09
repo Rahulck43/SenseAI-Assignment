@@ -7,7 +7,8 @@ import Login from "./user/components/Login";
 import AdminLogin from "./admin/components/Login";
 import DashBoard from "./admin/components/DashBoard";
 import Register from "./user/components/Register";
-import Profile from "./user/components/Profile";
+import ProfilePage from "./user/pages/ProfilePage";
+import EditProfilePage from "./user/pages/EditProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -28,8 +29,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: <ProfilePage />,
   },
+  {
+    path:"/edit-profile",
+    element:<EditProfilePage/>
+  }
 ]);
 
 function App() {

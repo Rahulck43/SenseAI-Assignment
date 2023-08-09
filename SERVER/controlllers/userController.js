@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken"
 import userModel from "../models/userModel"
 import bcrypt from 'bcrypt'
+import cloudinary from "../utils/cloudinary"
+
+
 
 const jwtKey = process.env.JWT_KEY
 
@@ -111,5 +114,116 @@ const postLogin = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    try {
+        const email = req.params.id
+        if (email) {
+            const user = await userModel.findOne({ email })
+            if (user) {
+                res.status(200).json({
+                    success: true,
+                    message: 'user data retrieved',
+                    user
+                })
+            } else {
+                res.status(400).json({
+                    success: false,
+                    message: 'unable to find user data',
+                })
+            }
+        } else {
+            res.status(400).json({
+                success: false,
+                message: 'unable to find user data',
+            })
+        }
+    } catch (error) {
+        console.error(error.message)
+        res.status(500).json({
+            success: false,
+            message: 'unable to find user data',
+        })
+    }
+}
 
-export { postSignup, postLogout, postLogin }
+const putEditUser = async (req, res) => {
+    try {
+        const email = req.params.id
+        const { name, mobileNo, address } = req.body
+        console.log(req.file)
+        if (req.file) {
+            const streamUpload = (fileBuffer) => {
+                return new Promise((resolve, reject) => {
+                    const stream = cloudinary.uploader.upload_stream((error, result) => {
+                        if (result) {
+                            resolve(result);
+                        } else {
+                            reject(error);
+                        }
+                    });
+                    stream.write(fileBuffer);
+                    stream.end();
+                });
+            };
+            const result = await streamUpload(req.file.buffer);
+            const updatedUser = await userModel.findOneAndUpdate(
+                { email },
+                {
+                    mobileNo,
+                    address,
+                    name,
+                    profileImg: result.secure_url
+                },
+                { new: true }
+            )
+            if (updatedUser) {
+                res.status(200).json({
+                    success: true,
+                    message: 'user data updated successfully',
+                    updatedUser
+                })
+            } else {
+                res.status(400).json({
+                    success: false,
+                    message: 'error updating userdata',
+                })
+            }
+
+        } else {
+            const updatedUser = await userModel.findOneAndUpdate(
+                { email },
+                {
+                    mobileNo,
+                    address,
+                    name,
+
+                },
+                { new: true }
+            )
+            if (updatedUser) {
+                res.status(200).json({
+                    success: true,
+                    message: 'user data updated successfully',
+                    updatedUser
+                })
+            } else {
+                res.status(400).json({
+                    success: false,
+                    message: 'error updating userdata',
+                })
+            }
+        }
+
+    } catch (error) {
+        console.error(error.message)
+        res.status(500).json({
+            success: false,
+            message: 'unexpected error updating userdata',
+        })
+    }
+}
+
+
+
+
+export { postSignup, postLogout, postLogin, getUser, putEditUser }
