@@ -136,7 +136,6 @@ const generateLink = async (req, res) => {
     const reqId = req.params.id
     try {
         const req = await requestModel.findById(reqId)
-        console.log(req);
         const { email, _id } = req
         const token = jwt.sign(
             { email, requestId: _id },
@@ -176,30 +175,32 @@ const generateLink = async (req, res) => {
     }
 }
 
-const getRequsts=async(req,res)=>{
+const getRequsts = async (req, res) => {
     try {
-        const requests=await requestModel.find()
-        if(requests){
+        const requests = await requestModel.find({ token: { $exists: false } });
+
+        if (requests) {
             res.status(200).json({
-                success:true,
-                message:"requests retrieved succcessfully",
+                success: true,
+                message: "requests retrieved successfully",
                 requests
-            })
-        }else{
+            });
+        } else {
             res.status(400).json({
-                success:false,
-                message:"error while fetching request list",
-                requests
-            })
+                success: false,
+                message: "error while fetching request list",
+                requests: []
+            });
         }
     } catch (error) {
         res.status(500).json({
-            success:false,
-            message:"unexpected server error",
-            requests
-        })
+            success: false,
+            message: "unexpected server error",
+            requests: []
+        });
     }
-}
+};
+
 
 
 

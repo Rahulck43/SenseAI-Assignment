@@ -22,15 +22,17 @@ const Profile = () => {
   }, [])
 
   return (
-    <div className="max-w-md p-8 rounded-xl shadow-lg sm:flex sm:space-x-6 dark:bg-gray-900 dark:text-gray-100">
-      <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
-        <img src={userData.profileImg} alt="profile picture" className="object-cover object-center w-full h-full rounded dark:bg-gray-500" />
-      </div>
-      <div className="flex flex-col flex-wrap space-y-5">
-        <div>
-          <h2 className="text-2xl font-semibold">{userData.name}</h2>
+    <div className="max-w-md p-8 rounded-xl shadow-lg sm:flex sm:space-x-6 dark:bg-gray-900 dark:text-gray-100 flex flex-wrap">
+      <div className='flex'>
+        <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
+          <img src={userData.profileImg} alt="profile picture" className="object-cover object-center w-full h-full rounded dark:bg-gray-500" />
         </div>
-        <div className="space-y-2 ">
+        <div>
+          <h2 className="text-2xl font-semibold px-3 ml-4">{userData.name}</h2>
+        </div>
+      </div>
+      <div className="flex flex-col flex-wrap space-y-5 mt-6 ">
+        <div className="space-y-2 flex flex-col justify-center items-start">
           <span className="flex  items-center space-x-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-label="Email address" className="w-4 h-4">
               <path fill="currentColor" d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"></path>
@@ -44,12 +46,12 @@ const Profile = () => {
             <span className="dark:text-gray-400">{userData.mobileNo}</span>
           </span>
           <span className="flex  items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
             </svg>
-            <div className='flex flex-wrap'>
-            <span className="dark:text-gray-400 f whitespace-normal break-words">{userData.address}</span></div>
+            <div>
+              <span className="dark:text-gray-400 over">{userData.address}</span></div>
           </span>
         </div>
       </div>

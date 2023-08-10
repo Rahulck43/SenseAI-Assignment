@@ -4,10 +4,13 @@ import signupValidation from '../utils/signupValidationSchema'
 import apiInstance from '../../utils/APIinstance'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../utils/userSlice'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 
 const Register = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get("token");
 
   const [loginError, setLoginError] = useState('')
   const dispatch = useDispatch()
@@ -16,7 +19,7 @@ const Register = () => {
 
   const onSubmit = async (values) => {
     try {
-      const response = await apiInstance.post('/signup', values)
+      const response = await apiInstance.post(`/signup/${token}`, values)
       const { user, success, message } = response.data;
       if (!success) {
         setLoginError(message)

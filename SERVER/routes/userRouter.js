@@ -6,7 +6,7 @@ import upload from "../middlewares/upload";
 
 const router=Router()
 router.post('/request',postRequest)
-router.post('/signup',postSignup)
+router.post('/signup/:id',postSignup)
 router.post('/logout',postLogout)
 router.post('/login',postLogin)
 router.get('/users/:id',userAuth,getUser)

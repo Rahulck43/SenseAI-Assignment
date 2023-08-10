@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import apiInstance from '../../utils/APIinstance'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate,useLocation } from 'react-router-dom'
 import requestValidation from '../utils/requestValidation'
 import Register from './Register'
+import { logout } from '../utils/userSlice'
 
 
 const SignupRequest = () => {
     const location = useLocation();
+    const dispatch=useDispatch()
     const queryParams = new URLSearchParams(location.search);
     const token = queryParams.get("token");
-    console.log(token)
 
     const [resMessage, setResMessage] = useState('')
     const [istoken, setIsToken] = useState(false)
@@ -20,9 +21,10 @@ const SignupRequest = () => {
 
     const onSubmit = async (values) => {
         try {
+            console.log('onsubmittttttttttt')
             const response = await apiInstance.post('/request', values)
             console.log(response.data)
-            const { user, success, message } = response.data;
+            const {  success, message } = response.data;
             setResMessage(message)
         } catch (error) {
             if (error.response) {
@@ -31,7 +33,6 @@ const SignupRequest = () => {
             } else {
                 console.error('API error:', error)
                 setResMessage(error)
-                navigate('/')
             }
         }
     }
@@ -53,6 +54,7 @@ const SignupRequest = () => {
                     const response = await apiInstance.get(`/verify-token/${token}`);
                     console.log(response.data)
                     if (response.data.success) {
+                        dispatch(logout())
                         setIsToken(true);
                     }
                 } catch (error) {

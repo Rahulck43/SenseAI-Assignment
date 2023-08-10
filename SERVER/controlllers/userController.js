@@ -9,6 +9,7 @@ import requestModel from "../models/requestModel"
 const jwtKey = process.env.JWT_KEY
 
 const postSignup = async (req, res) => {
+    const reqToken=req.params.id
     try {
         const { name, email, password } = req.body;
         const userExist = await userModel.findOne({ email: email });
@@ -32,6 +33,7 @@ const postSignup = async (req, res) => {
                     expiresIn: "2h",
                 }
             )
+            const reslt=await requestModel.findOneAndDelete({token:reqToken})
             res.cookie('token', token, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 })
             res.status(200).json({
                 success: true,
@@ -151,7 +153,6 @@ const putEditUser = async (req, res) => {
     try {
         const email = req.params.id
         const { name, mobileNo, address } = req.body
-        console.log(req.file)
         if (req.file) {
             const streamUpload = (fileBuffer) => {
                 return new Promise((resolve, reject) => {
@@ -264,7 +265,6 @@ const postRequest = async (req, res) => {
 const getVerifyToken=async(req,res)=>{
     try {
         const token=req.params.id
-        console.log(token);
         const verify=await requestModel.findOne({token})
         if(verify){
             res.status(200).json({

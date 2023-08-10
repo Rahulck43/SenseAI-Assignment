@@ -9,6 +9,7 @@ import DashBoard from "./admin/components/DashBoard";
 import ProfilePage from "./user/pages/ProfilePage";
 import EditProfilePage from "./user/pages/EditProfilePage";
 import SignupRequest from "./user/components/SignupRequest";
+import RequestPage from "./admin/components/RequestPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path:"/edit-profile",
     element:<EditProfilePage/>
+  },
+  {
+    path:"/admin/requests",
+    element:<RequestPage/>
   }
 ]);
 

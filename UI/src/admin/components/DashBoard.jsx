@@ -4,7 +4,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../utils/adminSlice'
 import apiInstance from '../../utils/APIinstance'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const DashBoard = () => {
     const [usersList, setUsersList] = useState([])
@@ -26,7 +26,6 @@ const DashBoard = () => {
             setUsersList(users)
         }
     }
-
     const handleDelete = async (userId) => {
         confirmAlert({
             title: 'Confirm Delete',
@@ -49,7 +48,6 @@ const DashBoard = () => {
             ]
         });
     };
-
     useEffect(() => {
         if (!isLoggedIn) {
             navigate('/admin')
@@ -73,8 +71,9 @@ const DashBoard = () => {
                                 <span>Logout</span>
                             </button>
                             <button  class="bg-slate-500 hover:bg-slate-800 text-white font-semibold py-2 px-4 mx-4 rounded-lg inline-flex items-center">
-                                
-                                <span>Generate Link</span>
+                                <Link to="/admin/requests">
+                                <span>View Requests</span>
+                                </Link>
                             </button>
                         </div>
                         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
