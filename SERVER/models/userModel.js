@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
 
-
 const userSchema=Schema({
     name:{
         type:String,
@@ -29,6 +28,4 @@ const userSchema=Schema({
 
 
 const userModel=mongoose.model('User',userSchema)
-
 export default userModel
-

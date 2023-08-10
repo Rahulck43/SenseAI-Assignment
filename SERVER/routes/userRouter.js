@@ -12,7 +12,6 @@ router.post('/login',postLogin)
 router.get('/users/:id',userAuth,getUser)
 router.put('/users/:id',userAuth,upload.single("file"),putEditUser)
 router.get('/verify-token/:id',getVerifyToken)
-router.post('/request',postRequest)
 
 
 

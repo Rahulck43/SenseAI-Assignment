@@ -3,13 +3,10 @@ import userModel from "../models/userModel"
 import bcrypt from 'bcrypt'
 import cloudinary from "../utils/cloudinary"
 import requestModel from "../models/requestModel"
-
-
-
 const jwtKey = process.env.JWT_KEY
 
 const postSignup = async (req, res) => {
-    const reqToken=req.params.id
+    const reqToken = req.params.id
     try {
         const { name, email, password } = req.body;
         const userExist = await userModel.findOne({ email: email });
@@ -30,10 +27,10 @@ const postSignup = async (req, res) => {
                 { user_id: newUser._id, email },
                 jwtKey,
                 {
-                    expiresIn: "2h",
+                    expiresIn: "24h",
                 }
             )
-            const reslt=await requestModel.findOneAndDelete({token:reqToken})
+            const reslt = await requestModel.findOneAndDelete({ token: reqToken })
             res.cookie('token', token, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 })
             res.status(200).json({
                 success: true,
@@ -97,7 +94,7 @@ const postLogin = async (req, res) => {
                     { user_id: user._id, email },
                     jwtKey,
                     {
-                        expiresIn: "2h",
+                        expiresIn: "24h",
                     }
                 );
                 res.cookie('token', token, { httpOnly: true });
@@ -262,16 +259,16 @@ const postRequest = async (req, res) => {
     }
 };
 
-const getVerifyToken=async(req,res)=>{
+const getVerifyToken = async (req, res) => {
     try {
-        const token=req.params.id
-        const verify=await requestModel.findOne({token})
-        if(verify){
+        const token = req.params.id
+        const verify = await requestModel.findOne({ token })
+        if (verify) {
             res.status(200).json({
                 success: true,
                 message: 'token verified successfully'
             });
-        }else{
+        } else {
             res.status(401).json({
                 success: false,
                 message: 'token verification failed'
@@ -291,4 +288,4 @@ const getVerifyToken=async(req,res)=>{
 
 
 
-export { postSignup, postLogout, postLogin, getUser, putEditUser, postRequest,getVerifyToken}
+export { postSignup, postLogout, postLogin, getUser, putEditUser, postRequest, getVerifyToken }

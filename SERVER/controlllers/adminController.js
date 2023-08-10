@@ -4,12 +4,7 @@ import userModel from "../models/userModel"
 import bcrypt from 'bcrypt'
 import requestModel from "../models/requestModel"
 import transporter from "../utils/nodeMailer"
-
 const signupUrl = process.env.SIGNUP_URL
-
-
-
-
 const jwtKey = process.env.JWT_KEY
 
 
@@ -205,4 +200,4 @@ const getRequsts = async (req, res) => {
 
 
 
-export { postLogin, postLogout, getUsers, deleteUser, generateLink,getRequsts }
+export { postLogin, postLogout, getUsers, deleteUser, generateLink, getRequsts }

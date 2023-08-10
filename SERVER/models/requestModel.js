@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
 
-
 const requestSchema = Schema({
     email: {
         type: String,
@@ -17,6 +16,4 @@ const requestSchema = Schema({
 })
 
 const requestModel = mongoose.model('Request', requestSchema)
-
-
 export default requestModel

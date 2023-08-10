@@ -21,9 +21,7 @@ const SignupRequest = () => {
 
     const onSubmit = async (values) => {
         try {
-            console.log('onsubmittttttttttt')
             const response = await apiInstance.post('/request', values)
-            console.log(response.data)
             const {  success, message } = response.data;
             setResMessage(message)
         } catch (error) {
@@ -52,18 +50,14 @@ const SignupRequest = () => {
             async function checkToken(){
                 try {
                     const response = await apiInstance.get(`/verify-token/${token}`);
-                    console.log(response.data)
                     if (response.data.success) {
                         dispatch(logout())
                         setIsToken(true);
                     }
                 } catch (error) {
                     if (error.response) {
-                        // Handle API error response
                         console.error('API error:', error.response.data);
-                        // setResMessage(error.response.data.message);
                     } else {
-                        // Handle other errors
                         console.error('Error verifying token:', error);
                         setResMessage('Unexpected network error');
                     }
@@ -91,9 +85,9 @@ const SignupRequest = () => {
                         </div>
                         <div className="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">
                             <div className="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
-                                {!resMessage && <h2 className="font-thin text-xl  text-gray-800 text-left mb-5">
-                                oops...!!! You are not Authorised. <br />
-                                    No worries,you can request a registration link from the admin here
+                                {!resMessage && <h2 className="font text-xl  text-red-400 text-left mb-5">
+                                OOPS!  You are not Authorised. <br />
+                                    No worries,you can request a registration link from the admin here.
                                 </h2>}
                                 <form onSubmit={handleSubmit} className="w-full">
 

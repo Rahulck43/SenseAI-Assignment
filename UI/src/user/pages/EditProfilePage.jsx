@@ -14,7 +14,7 @@ const EditProfilePage = () => {
     }
   },[isLoggedIn])
   return (
-    <div className='bg-gray-100 min-h-screen' >
+    <div className='bg-blue-50 min-h-screen' >
       <div>
         <NavBar />
         <div className='flex  justify-center flex-grow mt-20'>

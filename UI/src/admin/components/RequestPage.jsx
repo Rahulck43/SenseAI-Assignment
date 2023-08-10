@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../utils/adminSlice'
