@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 app.use('/api/admin', adminRouter);
-app.use('/api/', userRouter);
+app.use('/api', userRouter);
 
 dbConnection();
 app.listen(5000, () => {
