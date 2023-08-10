@@ -65,12 +65,16 @@ const DashBoard = () => {
             <body className="antialiased font-sans">
                 <div className="container mx-auto px-4 sm:px-8">
                     <div className="py-8">
-                        <div>
+                        <div className='flex '>
                             <button onClick={handleLogout} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
                                 </svg>
                                 <span>Logout</span>
+                            </button>
+                            <button  class="bg-slate-500 hover:bg-slate-800 text-white font-semibold py-2 px-4 mx-4 rounded-lg inline-flex items-center">
+                                
+                                <span>Generate Link</span>
                             </button>
                         </div>
                         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">

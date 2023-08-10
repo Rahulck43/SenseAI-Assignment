@@ -2,6 +2,10 @@ import jwt from "jsonwebtoken"
 import adminModel from "../models/adminModel"
 import userModel from "../models/userModel"
 import bcrypt from 'bcrypt'
+import requestModel from "../models/requestModel"
+import transporter from "../utils/nodeMailer"
+
+const signupUrl = process.env.SIGNUP_URL
 
 
 
@@ -111,7 +115,7 @@ const deleteUser = async (req, res) => {
                     success: false,
                     message: 'User not found',
                 });
-            }else{
+            } else {
                 await userModel.findByIdAndDelete(userId)
                 res.status(200).json({
                     success: true,
@@ -128,7 +132,76 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const generateLink = async (req, res) => {
+    const reqId = req.params.id
+    try {
+        const req = await requestModel.findById(reqId)
+        console.log(req);
+        const { email, _id } = req
+        const token = jwt.sign(
+            { email, requestId: _id },
+            jwtKey
+        )
+        await requestModel.findByIdAndUpdate(
+            reqId,
+            { token }
+        )
+        const signupLink = `${signupUrl}?token=${token}`
+        const mailOptions = {
+            from: 'asenseai5@gmail.com',
+            to: email,
+            subject: 'Invitation Link',
+            text: `Click the following link to signup: ${signupLink}`,
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Error sending email',
+                });
+            }
+            res.status(200).json({
+                success: true,
+                message: 'Email sent successfully',
+            });
+        });
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: 'Unexpected error while generating link',
+        });
+    }
+}
+
+const getRequsts=async(req,res)=>{
+    try {
+        const requests=await requestModel.find()
+        if(requests){
+            res.status(200).json({
+                success:true,
+                message:"requests retrieved succcessfully",
+                requests
+            })
+        }else{
+            res.status(400).json({
+                success:false,
+                message:"error while fetching request list",
+                requests
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success:false,
+            message:"unexpected server error",
+            requests
+        })
+    }
+}
 
 
 
-export { postLogin, postLogout, getUsers, deleteUser }
+
+export { postLogin, postLogout, getUsers, deleteUser, generateLink,getRequsts }

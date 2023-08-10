@@ -65,7 +65,7 @@ const Login = () => {
                     <div className="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">
                         <div className="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
                             <h2 className="text-2xl font-bold text-gray-800 text-left mb-5">
-                                Sigin
+                                Login
                             </h2>
                             <form onSubmit={handleSubmit} className="w-full">
                                 <div id="input" className="flex flex-col w-full my-5">

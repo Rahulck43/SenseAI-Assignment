@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken"
 import userModel from "../models/userModel"
 import bcrypt from 'bcrypt'
 import cloudinary from "../utils/cloudinary"
+import requestModel from "../models/requestModel"
 
 
 
@@ -223,7 +224,71 @@ const putEditUser = async (req, res) => {
     }
 }
 
+const postRequest = async (req, res) => {
+    try {
+        const { email, description } = req.body;
+        const existingRequest = await requestModel.findOne({ email });
+
+        if (existingRequest) {
+            if (existingRequest.token) {
+                res.status(409).json({
+                    success: true,
+                    message: 'You will receive an invite link shortly...!!!'
+                });
+            } else {
+                res.status(200).json({
+                    success: true,
+                    message: 'Your request is already sent, please wait for Admin response'
+                });
+            }
+        } else {
+            const newRequest = new requestModel({
+                email,
+                description,
+            });
+            await newRequest.save();
+            res.status(200).json({
+                success: true,
+                message: 'You will receive an invite link shortly...!!!'
+            });
+        }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: 'Unexpected network error'
+        });
+    }
+};
+
+const getVerifyToken=async(req,res)=>{
+    try {
+        const token=req.params.id
+        console.log(token);
+        const verify=await requestModel.findOne({token})
+        if(verify){
+            res.status(200).json({
+                success: true,
+                message: 'token verified successfully'
+            });
+        }else{
+            res.status(401).json({
+                success: false,
+                message: 'token verification failed'
+            });
+        }
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: 'Unexpected network error'
+        });
+    }
+}
 
 
 
-export { postSignup, postLogout, postLogin, getUser, putEditUser }
+
+
+export { postSignup, postLogout, postLogin, getUser, putEditUser, postRequest,getVerifyToken}

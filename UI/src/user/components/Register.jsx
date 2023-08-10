@@ -56,7 +56,7 @@ const Register = () => {
   }, [isLoggedIn])
 
   return (
-    <body className="antialiased bg-gradient-to-br from-green-100 to-white">
+    <div className="antialiased bg-gradient-to-br from-green-100 to-white">
       <div className="container px-6 mx-auto">
         <div className="flex flex-col text-center md:text-left md:flex-row h-screen justify-evenly md:items-center">
           <div className="flex flex-col w-full">
@@ -94,6 +94,7 @@ const Register = () => {
                     id="email"
                     name='email'
                     placeholder="Please insert your email"
+                    autoComplete="username"
                     className="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                   />
                   {errors.email && touched.email && <p className="text-red-500">{errors.email}</p>}
@@ -108,12 +109,13 @@ const Register = () => {
                     id="password"
                     name='password'
                     placeholder="Please insert your password"
+                    autoComplete="new-password"
                     className="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                   />
                   {errors.password && touched.password && <p className="text-red-500">{errors.password}</p>}
                 </div>
                 <div id="input" className="flex flex-col w-full my-5">
-                  <label htmlFor="confirmPassword" className="text-gray-500 mb-2">Password</label>
+                  <label htmlFor="confirmPassword" className="text-gray-500 mb-2">Confirm Password</label>
                   <input
                     value={values.confirmPassword}
                     onChange={handleChange}
@@ -122,6 +124,7 @@ const Register = () => {
                     id="confirmPassword"
                     name='confirmPassword'
                     placeholder="Please re enter your password"
+                    autoComplete="new-password"
                     className="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                   />
                   {errors.confirmPassword && touched.confirmPassword && <p className="text-red-500">{errors.confirmPassword}</p>}
@@ -166,7 +169,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   )
 }
 
