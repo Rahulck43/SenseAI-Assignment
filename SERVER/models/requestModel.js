@@ -11,7 +11,6 @@ const requestSchema = Schema({
     },
     token: {
         type: String,
-        unique: true
     }
 })
 

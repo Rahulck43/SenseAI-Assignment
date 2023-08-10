@@ -10,7 +10,7 @@ import userRouter from "./routes/userRouter";
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: ['http://localhost:5173', 'https://senseai-4fc46.web.app', 'https://senseai-4fc46.firebaseapp.com'],
   credentials: true
 }));
 app.use(express.json());

@@ -31,7 +31,7 @@ const postSignup = async (req, res) => {
                 }
             )
             const reslt = await requestModel.findOneAndDelete({ token: reqToken })
-            res.cookie('token', token, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 })
+            res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true })
             res.status(200).json({
                 success: true,
                 message: 'User created successfully',
@@ -97,7 +97,8 @@ const postLogin = async (req, res) => {
                         expiresIn: "24h",
                     }
                 );
-                res.cookie('token', token, { httpOnly: true });
+                res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true });
+
                 res.status(200).json({
                     success: true,
                     message: 'login successful',
@@ -117,6 +118,7 @@ const postLogin = async (req, res) => {
 const getUser = async (req, res) => {
     try {
         const email = req.params.id
+        console.log(email)
         if (email) {
             const user = await userModel.findOne({ email })
             if (user) {
@@ -226,9 +228,10 @@ const postRequest = async (req, res) => {
     try {
         const { email, description } = req.body;
         const existingRequest = await requestModel.findOne({ email });
+        console.log(existingRequest)
 
         if (existingRequest) {
-            if (existingRequest.token) {
+            if (existingRequest?.token) {
                 res.status(409).json({
                     success: true,
                     message: 'You will receive an invite link shortly...!!!'

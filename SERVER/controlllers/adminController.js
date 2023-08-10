@@ -27,7 +27,7 @@ const postLogin = async (req, res) => {
                         expiresIn: "2h",
                     }
                 )
-                await res.cookie('adminToken', token, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 })
+                await res.cookie('adminToken', token, { httpOnly: true, sameSite: 'none', secure: true })
                 res.status(200).json({
                     success: true,
                     message: 'admin logged in successfully',
