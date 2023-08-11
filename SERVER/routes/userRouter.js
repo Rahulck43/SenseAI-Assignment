@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getUser, getVerifyToken, postLogin, postLogout, postRequest, postSignup, putEditUser } from "../controlllers/userController";
-import userAuth from "../middlewares/userAuth";
-import upload from "../middlewares/upload";
+import { getUser, getVerifyToken, postLogin, postLogout, postRequest, postSignup, putEditUser } from "../controlllers/userController.js";
+import userAuth from "../middlewares/userAuth.js";
+import upload from "../middlewares/upload.js";
 
 
 const router=Router()

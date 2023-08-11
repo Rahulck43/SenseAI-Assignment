@@ -3,9 +3,9 @@ import cors from 'cors';
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import 'dotenv/config'
-import dbConnection from "./utils/dbConnection";
-import adminRouter from "./routes/adminRouter";
-import userRouter from "./routes/userRouter";
+import dbConnection from "./utils/dbConnection.js";
+import adminRouter from "./routes/adminRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 const app = express();
 

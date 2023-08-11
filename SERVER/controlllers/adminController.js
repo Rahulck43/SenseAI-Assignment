@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken"
-import adminModel from "../models/adminModel"
-import userModel from "../models/userModel"
+import adminModel from "../models/adminModel.js"
+import userModel from "../models/userModel.js"
 import bcrypt from 'bcrypt'
-import requestModel from "../models/requestModel"
-import transporter from "../utils/nodeMailer"
+import requestModel from "../models/requestModel.js"
+import transporter from "../utils/nodeMailer.js"
 const signupUrl = process.env.SIGNUP_URL
 const jwtKey = process.env.JWT_KEY
 

@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken"
-import userModel from "../models/userModel"
+import userModel from "../models/userModel.js"
 import bcrypt from 'bcrypt'
-import cloudinary from "../utils/cloudinary"
-import requestModel from "../models/requestModel"
+import cloudinary from "../utils/cloudinary.js"
+import requestModel from "../models/requestModel.js"
 const jwtKey = process.env.JWT_KEY
 
 const postSignup = async (req, res) => {

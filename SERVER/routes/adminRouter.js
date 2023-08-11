@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { deleteUser, generateLink, getRequsts, getUsers, postLogin, postLogout } from "../controlllers/adminController";
-import adminAuth from "../middlewares/adminAuth";
+import { deleteUser, generateLink, getRequsts, getUsers, postLogin, postLogout } from "../controlllers/adminController.js";
+import adminAuth from "../middlewares/adminAuth.js";
 
 
 const router=Router()
