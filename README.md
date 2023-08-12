@@ -3,6 +3,7 @@
 
 Introduction 
 This project implements an authentication flow with separate roles for admins and users. It includes features such as admin login, user login, user signup link requesting, user registration, admin unique link generation, and dashboards for both roles. The system is built using Express for the backend and React for the frontend, with MongoDB and Mongoose for the database, and a JWT-based approach for authentication. 
+You can access the hosted version of the application at https://senseai-4fc46.web.app
 
 
 Prerequisites
