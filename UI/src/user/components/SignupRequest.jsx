@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import apiInstance from '../../utils/APIinstance'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate,useLocation } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import requestValidation from '../utils/requestValidation'
 import Register from './Register'
 import { logout } from '../utils/userSlice'
@@ -10,7 +10,7 @@ import { logout } from '../utils/userSlice'
 
 const SignupRequest = () => {
     const location = useLocation();
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const queryParams = new URLSearchParams(location.search);
     const token = queryParams.get("token");
 
@@ -22,7 +22,7 @@ const SignupRequest = () => {
     const onSubmit = async (values) => {
         try {
             const response = await apiInstance.post('/request', values)
-            const {  success, message } = response.data;
+            const { success, message } = response.data;
             setResMessage(message)
         } catch (error) {
             if (error.response) {
@@ -44,10 +44,10 @@ const SignupRequest = () => {
         validationSchema: requestValidation,
         onSubmit
     })
-  
+
     useEffect(() => {
         if (token) {
-            async function checkToken(){
+            async function checkToken() {
                 try {
                     const response = await apiInstance.get(`/verify-token/${token}`);
                     if (response.data.success) {
@@ -65,7 +65,7 @@ const SignupRequest = () => {
             }
             checkToken();
         }
-    },[])
+    }, [])
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -86,7 +86,7 @@ const SignupRequest = () => {
                         <div className="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">
                             <div className="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
                                 {!resMessage && <h2 className="font text-xl  text-red-400 text-left mb-5">
-                                OOPS!  You are not Authorised. <br />
+                                    OOPS!  You are not Authorised. <br />
                                     No worries,you can request a registration link from the admin here.
                                 </h2>}
                                 <form onSubmit={handleSubmit} className="w-full">

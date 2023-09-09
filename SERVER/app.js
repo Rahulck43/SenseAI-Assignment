@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-app.use('/api/admin', adminRouter);
-app.use('/api', userRouter);
+app.use('/admin', adminRouter);
+app.use('/', userRouter);
 
 dbConnection();
 app.listen(5000, () => {

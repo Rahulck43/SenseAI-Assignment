@@ -189,7 +189,6 @@ const putEditUser = async (req, res) => {
                     message: 'error updating userdata',
                 })
             }
-
         } else {
             const updatedUser = await userModel.findOneAndUpdate(
                 { email },
@@ -197,7 +196,6 @@ const putEditUser = async (req, res) => {
                     mobileNo,
                     address,
                     name,
-
                 },
                 { new: true }
             )
@@ -214,7 +212,6 @@ const putEditUser = async (req, res) => {
                 })
             }
         }
-
     } catch (error) {
         console.error(error.message)
         res.status(500).json({
@@ -234,7 +231,7 @@ const postRequest = async (req, res) => {
             if (existingRequest?.token) {
                 res.status(409).json({
                     success: true,
-                    message: 'You will receive an invite link shortly...!!!'
+                    message:'Your invite link is already sent, please check your inbox'
                 });
             } else {
                 res.status(200).json({

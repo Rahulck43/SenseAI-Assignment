@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const apiInstance = axios.create({
-    baseURL: 'https://www.euphoriashop.live/api', 
+    baseURL: 'http://localhost:5000', 
     withCredentials:true
   });
   
